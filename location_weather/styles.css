@@ -1,0 +1,31 @@
+body {
+  background: black;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 20%;
+}
+.btn {
+
+		width: 240px;
+		height: 65px;
+		background-color: transparent ;
+		padding:20px 60px;
+		font-weight: bolder;
+		color: white;
+		border: 3px solid white;
+		margin-top: 60px;
+    margin-right: 5%;
+	}
+
+.btn:hover {
+	background-color: transparent;
+	font-weight: bolder;
+	color: white;
+	border: 3px solid white;
+	filter: brightness(70%);
+	filter: opacity(60%);
+}
