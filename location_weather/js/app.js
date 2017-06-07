@@ -1,31 +1,35 @@
+var outputElem = document.getElementById('content')
 
-var outputElem = document.body
-//outputElem.innerText = 'Хз чи воно працює'
 
 function coordinates(){
+  var date = new Date;
   var xhr = new XMLHttpRequest();
-
-  xhr.open('GET', 'https://darksky.net/details/49.8454,24.0054/' +  date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate() + '/si24/en')
-  //xhr.open('GET', 'https://darksky.net/forecast/')
+  var time = date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate()+'T'+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
+  xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/49.839683,24.029717,' + date.getTime())
+  //xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/49.839683,24.029717,' + `${time}` +'Europe/Kyiv')
+ // xhr.open('GET', 'https://api.darksky.net/')
 
   xhr.onreadystatechange = function(){
    if (xhr.readyState !=4) return;
     if (xhr.status != 200) {
       alert('Error '+ xhr.status + ':' +xhr.statusText)
       return;
-  console.log(xhr.response)
+  
    }
-    console.log(xhr);
-    outputElem.innerHTML = xhr;
+    console.log(xhr.response);
+    document.getElementById('header').innerText = JSON.parse(xhr.responseText).timezone;
   }
-  outputElem.innerText = xhr;
+  //outputElem.innerText = xhr;
   xhr.send();
 }
 
 
 
-var previous = document.getElementById('previous')
-previous.addEventListener('click', getPrevWeather)
+//2000-04-06T12:20:05 -time example
+
+
+//var previous = document.getElementById('previous')
+//previous.addEventListener('click', getPrevWeather)
 
 function getPrevWeather() {
     var date = new Date;
@@ -37,9 +41,9 @@ function getPrevWeather() {
       if (xhr.status != 200) {
         alert('Error '+ xhr.status + ':' +xhr.statusText)
         return;
-          console.log(xhr.response)
+         
      }
-      console.log(xhr);
+      console.log(xhr.response);
       outputElem.innerHTML = xhr;
     }
     outputElem.innerText = xhr;
@@ -54,8 +58,8 @@ function getPrevWeather() {
     function getNextWeather(e) {
         var date = new Date;
         var xhr = new XMLHttpRequest();
-        var default = 'https://darksky.net/details/49.8454,24.0054/' +  date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate() + '/si24/en'
-        if ()
+        var defaultDate = 'https://darksky.net/details/49.8454,24.0054/' +  date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate() + '/si24/en'
+       
 
         xhr.open('GET', 'https://darksky.net/details/49.8454,24.0054/' +  date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate()+1 + '/si24/en')
 
@@ -64,9 +68,9 @@ function getPrevWeather() {
           if (xhr.status != 200) {
             alert('Error '+ xhr.status + ':' +xhr.statusText)
             return;
-              console.log(xhr.response)
+              
          }
-          console.log(xhr);
+          console.log(xhr.response);
           outputElem.innerHTML = xhr;
         }
         outputElem.innerText = xhr;
