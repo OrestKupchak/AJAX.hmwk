@@ -2,24 +2,21 @@
 <html>
 <head>
 	<title>play with ajax</title>
+
 </head>
 <body>
 	<div id="images">
-		Loading ..
+
 	</div>
 	<button onclick="getImages()">Get images</button>
+    <link rel="stylesheet" href="styles.css">
 
-	<style type="text/css">
-		#images img {
-			height: 50px;
-			margin: 3px;
-		}
-	</style>
 
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 
 	<script type="text/javascript">
 		var get = function (url, callback) {
+			debugger;
 			var xhr = new XMLHttpRequest();
 			xhr.open("GET", url, true);
 
@@ -44,9 +41,9 @@
 			// <img src="{url}" />
 
 			imgEl.onerror = function () {
-				// when image loading failed
+			  imgEl.classList.add('hidden')
 				// @todo hide image
-				alert(1);
+				//alert(1);
 			}
 
 			document.getElementById('images').appendChild(imgEl);
