@@ -1,11 +1,39 @@
+function coordinates(){
+ debugger
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET' ,'http://ip-api.com/json')
+ 
+
+  xhr.onreadystatechange = function(){
+   if (xhr.readyState !=4) return;
+    if (xhr.status != 200) {
+      alert('Error '+ xhr.status + ':' +xhr.statusText)
+      return;
+  
+   }
+    console.log(xhr.response);
+    document.getElementById('header').innerText = JSON.parse(xhr.responseText).country + '/' + JSON.parse(xhr.responseText).city;
+    var lon = JSON.parse(xhr.responseText).lon
+    console.log(lon)
+    var lat = JSON.parse(xhr.responseText).lat
+    console.log(lat)
+    var coords = lat+','+lon
+    return coords
+  }
+  //outputElem.innerText = xhr;
+  xhr.send();
+}
+
+
+
 var outputElem = document.getElementById('content')
 
 
-function coordinates(){
+function getWeather(coords){
   var date = new Date;
   var xhr = new XMLHttpRequest();
   var time = date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate()+'T'+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
-  xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/49.839683,24.029717,' + date.getTime())
+  xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/'+ coords + ',' + date.getTime())
   //xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/49.839683,24.029717,' + `${time}` +'Europe/Kyiv')
  // xhr.open('GET', 'https://api.darksky.net/')
 
