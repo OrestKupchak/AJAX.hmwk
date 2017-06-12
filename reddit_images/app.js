@@ -43,13 +43,16 @@ var appendImage = function (url) {
 // "S"OLID, S -> Single Responsibility
 
 var getImages = function (params = {}) {
+
+  document.getElementById('noise').className = 'blacked'
+
    var url = 'https://www.reddit.com/r/pics/search.json?q='
 
  if (params.length > 0) {
     params.limit = params.limit
     params.category = params.category
 } else {
-    params.limit = 100
+    params.limit = 200
     params.category = 'cats'
 }
     url += params.category;

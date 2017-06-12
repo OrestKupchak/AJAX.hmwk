@@ -1,7 +1,8 @@
+
 var coords = '';
 
 window.onload = function coordinates(){
- debugger
+ //debugger
   var xhr = new XMLHttpRequest();
   xhr.open('GET' ,'http://ip-api.com/json')
 
@@ -20,15 +21,45 @@ window.onload = function coordinates(){
     var lat = JSON.parse(xhr.responseText).lat
     console.log(lat)
     coords = lat+','+lon
-    getWeather(coords)
+    //getWeather(coords)
   }
   //outputElem.innerText = xhr;
   xhr.send();
 
 }
 
+
 //var outputElem = document.getElementById('content')
 
+jQuery(document).ready(function() { 
+
+  var proxy = 'https://cors-anywhere.herokuapp.com/';
+  var apiLinkDS = "https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/49.839683,24.029717";
+
+  jQuery.ajax({
+    url: proxy + apiLinkDS,
+    success:function(data) { 
+      console.log(data);
+
+
+        document.getElementById('summary').innerText = data.daily.summary 
+        document.getElementById('temperature').innerText = 'Max temperature: ' + data.daily.data[4].apparentTemperatureMax
+        document.getElementById('wind').innerText = 'Wind speed: '+ data.daily.data[4].windSpeed + ' m/s';
+        document.getElementById('pressure').innerText = 'Pressure:' +data.daily.data[4].pressure  
+
+        if (data.daily.icon === 'rain') {
+          document.body.style.backgroundImage = "url('rain.jpg')"
+
+        }
+    }
+  });
+
+
+
+});
+
+
+/*
  function getWeather(coords){
   var date = new Date;
   var xhr = new XMLHttpRequest();
@@ -40,7 +71,7 @@ window.onload = function coordinates(){
   xhr.onreadystatechange = function(){
    if (xhr.readyState !=4) return;
     if (xhr.status != 200) {
-      alert('Error '+ xhr.status + ':' +xhr.statusText)
+    //  alert('Error '+ xhr.status + ':' +xhr.statusText)
       return;
 
    }
