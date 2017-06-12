@@ -1,5 +1,6 @@
 
 var get = function (url, callback) {
+  
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
 
@@ -24,8 +25,7 @@ var appendImage = function (url) {
   // <img src="{url}" />
 
   imgEl.onerror = function () {
-  		  imgEl.classList.add('hidden')
-    // @todo hide image
+    imgEl.classList.add('hidden')
     //alert(1);
   }
 
@@ -41,14 +41,19 @@ var appendImage = function (url) {
 // getImages()
 
 // "S"OLID, S -> Single Responsibility
-var params = {'limit': 100, 'category': 'cats'}
 
-var getImages = function (params) {
- if (params) {
-  var url = 'https://www.reddit.com/r/pics/search.json?q=cats';
-      url += '&limit=5';
-      // @todo: use here params.limit
-      // @todo: category == "pics"
+var getImages = function (params = {}) {
+   var url = 'https://www.reddit.com/r/pics/search.json?q='
+
+ if (params.length > 0) {
+    params.limit = params.limit 
+    params.category = params.category 
+} else {
+    params.limit = 100
+    params.category = 'cats'
+}
+    url += params.category;
+    url += '/&limit=' + params.limit;
 
   get(url, function (status, headers, body) {
     var response = JSON.parse(body);
