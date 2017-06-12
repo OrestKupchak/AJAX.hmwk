@@ -1,15 +1,79 @@
-function coordinates(){
+var coords = '';
+
+window.onload = function coordinates(){
  debugger
   var xhr = new XMLHttpRequest();
   xhr.open('GET' ,'http://ip-api.com/json')
- 
+
 
   xhr.onreadystatechange = function(){
    if (xhr.readyState !=4) return;
     if (xhr.status != 200) {
       alert('Error '+ xhr.status + ':' +xhr.statusText)
       return;
-  
+
+   }
+    console.log(xhr.response);
+    document.getElementById('header').innerText = JSON.parse(xhr.responseText).country + '/' + JSON.parse(xhr.responseText).city;
+    var lon = JSON.parse(xhr.responseText).lon
+    console.log(lon)
+    var lat = JSON.parse(xhr.responseText).lat
+    console.log(lat)
+    coords = lat+','+lon
+    getWeather(coords)
+  }
+  //outputElem.innerText = xhr;
+  xhr.send();
+
+}
+
+//var outputElem = document.getElementById('content')
+
+ function getWeather(coords){
+  var date = new Date;
+  var xhr = new XMLHttpRequest();
+  var time = date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate()+'T'+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
+  //xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/'+ coords + ',' + date.getTime())
+  //xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/49.839683,24.029717,' + `${time}` +'Europe/Kyiv')
+  xhr.open('GET', 'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/'+ coords)
+
+  xhr.onreadystatechange = function(){
+   if (xhr.readyState !=4) return;
+    if (xhr.status != 200) {
+      alert('Error '+ xhr.status + ':' +xhr.statusText)
+      return;
+
+   }
+    console.log(xhr.response);
+    document.getElementById('summary').innerText = 'Summary:'+ JSON.parse(xhr.responseText).daily.summary;
+    document.getElementById('temperature').innerText = 'Temperature:' + JSON.parse(xhr.responseText).daily.temperature;
+    document.getElementById('wind').innerText = 'Wind speed:'+ JSON.parse(xhr.responseText).hourly.windSpeed;
+    document.getElementById('pressure').innerText = 'Pressure:' + JSON.parse(xhr.responseText).hourly.pressure;
+  }
+  //outputElem.innerText = xhr;
+  xhr.send();
+}
+
+
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
+/*
+window.onload = function coordinates(){
+ debugger
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET' ,'http://ip-api.com/json')
+
+
+  xhr.onreadystatechange = function(){
+   if (xhr.readyState !=4) return;
+    if (xhr.status != 200) {
+      alert('Error '+ xhr.status + ':' +xhr.statusText)
+      return;
+
    }
     console.log(xhr.response);
     document.getElementById('header').innerText = JSON.parse(xhr.responseText).country + '/' + JSON.parse(xhr.responseText).city;
@@ -29,20 +93,20 @@ function coordinates(){
 var outputElem = document.getElementById('content')
 
 
-function getWeather(coords){
+window,onload = function getWeather(coords){
   var date = new Date;
   var xhr = new XMLHttpRequest();
   var time = date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate()+'T'+date.getHours()+':'+date.getMinutes()+':'+date.getSeconds()
-  xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/'+ coords + ',' + date.getTime())
+  //xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/'+ coords + ',' + date.getTime())
   //xhr.open('GET' ,'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/49.839683,24.029717,' + `${time}` +'Europe/Kyiv')
- // xhr.open('GET', 'https://api.darksky.net/')
+  xhr.open('GET', 'https://api.darksky.net/forecast/d407554e29ad2fe7013dc4a60a1d1682/' + coords)
 
   xhr.onreadystatechange = function(){
    if (xhr.readyState !=4) return;
     if (xhr.status != 200) {
       alert('Error '+ xhr.status + ':' +xhr.statusText)
       return;
-  
+
    }
     console.log(xhr.response);
     document.getElementById('header').innerText = JSON.parse(xhr.responseText).timezone;
@@ -69,7 +133,7 @@ function getPrevWeather() {
       if (xhr.status != 200) {
         alert('Error '+ xhr.status + ':' +xhr.statusText)
         return;
-         
+
      }
       console.log(xhr.response);
       outputElem.innerHTML = xhr;
@@ -87,7 +151,7 @@ function getPrevWeather() {
         var date = new Date;
         var xhr = new XMLHttpRequest();
         var defaultDate = 'https://darksky.net/details/49.8454,24.0054/' +  date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate() + '/si24/en'
-       
+
 
         xhr.open('GET', 'https://darksky.net/details/49.8454,24.0054/' +  date.getFullYear() +'-'+ date.getMonth()+'-' + date.getDate()+1 + '/si24/en')
 
@@ -96,7 +160,7 @@ function getPrevWeather() {
           if (xhr.status != 200) {
             alert('Error '+ xhr.status + ':' +xhr.statusText)
             return;
-              
+
          }
           console.log(xhr.response);
           outputElem.innerHTML = xhr;

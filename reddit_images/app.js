@@ -1,6 +1,6 @@
 
 var get = function (url, callback) {
-  
+
   var xhr = new XMLHttpRequest();
   xhr.open("GET", url, true);
 
@@ -29,7 +29,7 @@ var appendImage = function (url) {
     //alert(1);
   }
 
-  document.getElementById('images').appendChild(imgEl);
+  document.getElementById('noise').appendChild(imgEl);
 }
 
 // getImages({limit: 5})
@@ -46,8 +46,8 @@ var getImages = function (params = {}) {
    var url = 'https://www.reddit.com/r/pics/search.json?q='
 
  if (params.length > 0) {
-    params.limit = params.limit 
-    params.category = params.category 
+    params.limit = params.limit
+    params.category = params.category
 } else {
     params.limit = 100
     params.category = 'cats'
