@@ -1,11 +1,41 @@
 body {
-   background-image: url(rain.jpg);
+   background-image: url(lviv.jpg);
    background-repeat: no-repeat;
     -moz-background-size: 100%; 
     -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
     background-size: 100%; /* Современные браузеры */
     color: white;
     font-weight: bold;
+    font-size: 26px;
+}
+
+
+h1 {
+  font-size: 44px;
+      font-weight: bolder;
+}
+
+h3 {
+  font-size: 40px;
+  font-weight: bolder;
+}
+
+#date {
+  margin-bottom: 4%;
+}
+
+#pressure {
+  margin-bottom: 2%;
+}
+#content {
+background-color: black;
+opacity: 0.7;
+border: 3px solid white;
+width: 50%;
+height: 50%;
+margin: 10% 10% 4% 23%;
+text-align: center;
+    
 }
 
 .container {
@@ -17,30 +47,22 @@ body {
 }
 
 .btn {
-		width: 100%;
+  background-color: black;
+    opacity: 0.7;
+		width: 30%;
     height: 50%;
-    background-color: transparent;
-    padding: 3%;
+    padding: 1%;
     font-weight: bolder;
     color: white;
     border: 3px solid white;
-    margin-top: 7%;
+    
     margin-right: 5%;
 	}
 
 .btn:hover {
-	background-color: transparent;
+
+  opacity: 0.9;
 	font-weight: bolder;
 	color: white;
 	border: 3px solid white;
-	filter: brightness(70%);
-	filter: opacity(60%);
-}
-
-
-#content {
-  width: 50%;
-  height: 50%;
-  ..display: none;
-  margin: 10%;
 }
