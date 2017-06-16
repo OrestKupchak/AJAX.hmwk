@@ -1,5 +1,17 @@
 window.onload = function coordinates() {    //find our coordinates using "ip-api"
+var proxy = 'https://cors-anywhere.herokuapp.com/';
+var link = 'http://ip-api.com/json';
 
+jQuery.ajax({
+        url: proxy + link,
+        success: function(data) {
+            console.log(data);
+            var lon = data.longitude
+            var lat = data.latitide
+            jQuery('#header').text(data.country+'/'+data.city)
+        }
+    });
+/*
     var xhr = new XMLHttpRequest();
     xhr.open('GET', 'https://freegeoip.net/json/github.com')
     var coords = '';
@@ -18,6 +30,7 @@ window.onload = function coordinates() {    //find our coordinates using "ip-api
     }
 
     xhr.send();
+    */
 }
 
 var currentDay;
