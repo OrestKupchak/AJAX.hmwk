@@ -1,7 +1,7 @@
 window.onload = function coordinates() {    //find our coordinates using "ip-api"
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://ip-api.com/json')
+    xhr.open('GET', 'https://freegeoip.net/json/github.com')
     var coords = '';
     xhr.onreadystatechange = function() {
         if (xhr.readyState != 4) return;
@@ -10,13 +10,11 @@ window.onload = function coordinates() {    //find our coordinates using "ip-api
             return;
         }
         console.log(xhr.response);
-        document.getElementById('header').innerText = JSON.parse(xhr.responseText).country + '/' + JSON.parse(xhr.responseText).city;
+        document.getElementById('header').innerText = JSON.parse(xhr.responseText).country_name + '/' + JSON.parse(xhr.responseText).city;
         var lon = JSON.parse(xhr.responseText).lon
-        console.log(lon)
         var lat = JSON.parse(xhr.responseText).lat
-        console.log(lat)
         coords = lat + ',' + lon
-        return coords
+        //сonsole.log(coords)
     }
 
     xhr.send();
@@ -34,6 +32,7 @@ jQuery(document).ready(function() {                    // find weather informati
         success: function(data) {
             console.log(data);
             currentDay = new Date();
+            //jQuery('#header').text(data.timezone)
             jQuery('#date').text(currentDay.toLocaleDateString())
             jQuery('#summary').text(data.currently.summary)
             jQuery('#temperature').text('Max temperature: ' + Math.round((data.currently.temperature - 32) * 5 / 9) + '°C')
