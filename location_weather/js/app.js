@@ -1,7 +1,7 @@
 window.onload = function coordinates() {    //find our coordinates using "ip-api"
 
     var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://ip-api.com/json')
+    xhr.open('GET', 'https://ip-api.com/json')
     var coords = '';
     xhr.onreadystatechange = function() {
         if (xhr.readyState != 4) return;
